@@ -1,0 +1,370 @@
+/* ============================================================
+   Переменные и базовый сброс
+   ============================================================ */
+:root {
+  --bg: #0b0d0c;
+  --bg-card: #121714;
+  --bg-card-hover: #161d19;
+  --text: #e6ece8;
+  --text-muted: #9fada3;
+  --accent: #4ec98a;
+  --accent-2: #30a37d;
+  --border: #243029;
+  --danger: #ff8a8a;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px 20px;
+  display: grid;
+  place-items: start center;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(78, 201, 138, 0.10), transparent 45%),
+    var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Скрытый текст для скринридеров */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Каркас приложения
+   ============================================================ */
+.app {
+  width: min(100%, 680px);
+}
+
+.app__header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.app__eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.app__title {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  letter-spacing: 0.02em;
+}
+
+.app__subtitle {
+  max-width: 480px;
+  margin: 8px auto 0;
+  color: var(--text-muted);
+}
+
+.app__panel {
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* ============================================================
+   Форма добавления
+   ============================================================ */
+.task-form {
+  display: flex;
+  gap: 10px;
+}
+
+.task-form__input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-form__input::placeholder {
+  color: #6f7d74;
+}
+
+.task-form__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(78, 201, 138, 0.15);
+}
+
+.task-form__button {
+  padding: 14px 22px;
+  color: #ffffff;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(78, 201, 138, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.task-form__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(78, 201, 138, 0.35);
+}
+
+.task-form__button:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+.form-error {
+  margin: 10px 0 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   Фильтры и счётчик
+   ============================================================ */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 22px 0 14px;
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter {
+  padding: 7px 12px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.filter.is-active {
+  color: #062015;
+  font-weight: 700;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.counter {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   Список задач
+   ============================================================ */
+.task-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.task:hover {
+  background: var(--bg-card-hover);
+  border-color: #2f3f35;
+}
+
+.task__checkbox {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.task__text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.task--done {
+  opacity: 0.75;
+}
+
+.task--done .task__text {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.task__delete {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.task__delete:hover {
+  color: var(--danger);
+  background: rgba(255, 138, 138, 0.1);
+}
+
+.empty {
+  margin: 18px 0 0;
+  padding: 24px;
+  color: var(--text-muted);
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+
+/* ============================================================
+   Действия и подвал
+   ============================================================ */
+.app__actions {
+  margin-top: 16px;
+}
+
+.clear-button {
+  padding: 4px 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: transparent;
+  border: 0;
+}
+
+.clear-button:hover {
+  color: var(--danger);
+}
+
+.app__footer {
+  margin-top: 24px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.app__footer p {
+  margin: 0;
+}
+
+/* ============================================================
+   Доступность
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   Мобильная версия
+   ============================================================ */
+@media (max-width: 520px) {
+  body {
+    padding: 24px 14px;
+  }
+
+  .app__panel {
+    padding: 18px;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .task-form__button {
+    width: 100%;
+  }
+
+  .toolbar {
+    align-items: flex-start;
+  }
+}

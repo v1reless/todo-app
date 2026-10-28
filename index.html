@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Todo-лист на чистом HTML, CSS и JavaScript. Задачи сохраняются в браузере.">
+  <meta name="theme-color" content="#0b0d0c">
+  <title>Мои задачи — Todo-лист</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <p class="app__eyebrow">Проект 2</p>
+      <h1 class="app__title">Мои задачи</h1>
+      <p class="app__subtitle">
+        Маленький Todo-лист на чистом JavaScript.
+        Задачи сохраняются в браузере — можно закрыть вкладку и вернуться позже.
+      </p>
+    </header>
+
+    <main class="app__panel">
+      <form class="task-form" id="task-form" novalidate>
+        <label class="sr-only" for="task-input">Новая задача</label>
+        <input
+          class="task-form__input"
+          id="task-input"
+          name="task"
+          type="text"
+          maxlength="200"
+          placeholder="Что нужно сделать?"
+          autocomplete="off"
+          required
+        >
+        <button class="task-form__button" type="submit">Добавить</button>
+      </form>
+
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Фильтр задач">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Все</button>
+          <button class="filter" type="button" data-filter="active" aria-pressed="false">Активные</button>
+          <button class="filter" type="button" data-filter="completed" aria-pressed="false">Выполненные</button>
+        </div>
+        <p class="counter" id="counter" aria-live="polite">Осталось: 0</p>
+      </div>
+
+      <ul class="task-list" id="task-list" aria-label="Список задач"></ul>
+      <p class="empty" id="empty" role="status" hidden></p>
+
+      <div class="app__actions">
+        <button class="clear-button" id="clear-completed" type="button" hidden>
+          Удалить выполненные
+        </button>
+      </div>
+
+      <noscript>
+        <p class="form-error">Для работы списка нужен JavaScript.</p>
+      </noscript>
+    </main>
+
+    <footer class="app__footer">
+      <p>© <span id="year">2026</span> v1reless. Todo-лист на чистом JavaScript.</p>
+    </footer>
+  </div>
+
+  <template id="task-template">
+    <li class="task">
+      <input class="task__checkbox" type="checkbox">
+      <label class="task__text"></label>
+      <button class="task__delete" type="button" aria-label="Удалить задачу">
+        <span aria-hidden="true">×</span>
+      </button>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
